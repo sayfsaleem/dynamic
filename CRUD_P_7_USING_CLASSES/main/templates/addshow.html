@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="row">
+    <div class="col-sm-4">
+        <h4 class="text-center alert-info alert">Add New Student</h4>
+<form method='post'>
+    {{form.as_p}}
+    <input type="submit" class="btn btn-success" value="add"> {% csrf_token %}
+</form>
+    </div>
+    <div class="col-sm-8">
+        <h4 class="text-center alert alert-info">User Informations</h4>
+        {%if data%}
+        <h4 class="text-center">Data Table</h4>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Email </th>
+      <th scope="col">Passcode</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {%for data in data%}<tr>
+      <th scope="row">{{data.id}}</th>
+      <td>{{data.name}}</td>
+      <td>{{data.email}}</td>
+      <td>{{data.passcode}}</td>
+      <td>
+        <a href="update/{{data.id}}" class="btn btn-warning btn-sm">Edit</a>
+        <a href="delete/{{data.id}}" class="btn btn-danger btn-sm">Delete</a>
+        <a href="profile/{{data.name}}" class="btn btn-success btn-sm">Profile</a>
+    </td>
+      {%endfor%}
+    </tr>
+  </tbody>
+</table>
+        {%else%}
+        <h4 class="text-center alert alert-warning">No Records</h4>
+        {%endif%}
+    </div>
+</div>
+{% endblock content %}{% comment %}
+
+
+{% endcomment %}
